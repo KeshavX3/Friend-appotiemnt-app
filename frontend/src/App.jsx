@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
@@ -16,10 +16,23 @@ function Navbar() {
   });
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const handler = () => {
+      try {
+        setUser(JSON.parse(localStorage.getItem("user")));
+      } catch {
+        setUser(null);
+      }
+    };
+    window.addEventListener("userChanged", handler);
+    return () => window.removeEventListener("userChanged", handler);
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
+    window.dispatchEvent(new Event("userChanged"));
     navigate("/login");
   };
 
@@ -48,13 +61,24 @@ function Navbar() {
 }
 
 function RequireAuth({ children }) {
-  const user = (() => {
+  const [user, setUser] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("user"));
     } catch {
       return null;
     }
-  })();
+  });
+  useEffect(() => {
+    const handler = () => {
+      try {
+        setUser(JSON.parse(localStorage.getItem("user")));
+      } catch {
+        setUser(null);
+      }
+    };
+    window.addEventListener("userChanged", handler);
+    return () => window.removeEventListener("userChanged", handler);
+  }, []);
   if (!user) {
     return <Navigate to="/login" />;
   }
