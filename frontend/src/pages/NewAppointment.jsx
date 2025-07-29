@@ -50,15 +50,16 @@ export default function NewAppointment() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] bg-gradient-to-br from-blue-50 to-blue-100">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-blue-100">
-        <h2 className="text-2xl font-bold mb-6 text-blue-700 text-center">Request New Appointment</h2>
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {error && <div className="text-red-500 text-sm text-center">{error}</div>}
+    <div className="flex flex-col items-center justify-center min-h-[80vh] font-quick">
+      <div className="relative bg-white/80 backdrop-blur-lg p-10 rounded-super shadow-2xl border-2 border-pookiePink max-w-md w-full animate-float">
+        <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-4xl animate-pulse" role="img" aria-label="sparkle">✨</span>
+        <h2 className="text-3xl font-extrabold mb-6 text-pookiePink text-center tracking-tight">Request Appointment <span className='ml-1'>💞</span></h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {error && <div className="text-pookiePink text-sm text-center">{error}</div>}
           <div>
-            <label className="block mb-1 font-medium text-blue-800">Approver (Friend)</label>
+            <label className="block mb-1 font-semibold text-pookiePurple">Approver (Friend)</label>
             <select
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border-2 border-pookiePink rounded-pill px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pookiePurple bg-white/70 font-quick text-pookiePurple"
               value={approverId}
               onChange={e => setApproverId(e.target.value)}
             >
@@ -69,9 +70,9 @@ export default function NewAppointment() {
             </select>
           </div>
           <div>
-            <label className="block mb-1 font-medium text-blue-800">Type</label>
+            <label className="block mb-1 font-semibold text-pookiePurple">Type</label>
             <select
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border-2 border-pookiePink rounded-pill px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pookiePurple bg-white/70 font-quick text-pookiePurple"
               value={type}
               onChange={e => setType(e.target.value)}
             >
@@ -82,27 +83,27 @@ export default function NewAppointment() {
             </select>
           </div>
           <div>
-            <label className="block mb-1 font-medium text-blue-800">Start Time</label>
+            <label className="block mb-1 font-semibold text-pookiePurple">Start Time</label>
             <input
               type="datetime-local"
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border-2 border-pookiePink rounded-pill px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pookiePurple bg-white/70 font-quick text-pookiePurple"
               value={startTime}
               onChange={e => setStartTime(e.target.value)}
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium text-blue-800">End Time</label>
+            <label className="block mb-1 font-semibold text-pookiePurple">End Time</label>
             <input
               type="datetime-local"
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border-2 border-pookiePink rounded-pill px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pookiePurple bg-white/70 font-quick text-pookiePurple"
               value={endTime}
               onChange={e => setEndTime(e.target.value)}
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium text-blue-800">Note (optional)</label>
+            <label className="block mb-1 font-semibold text-pookiePurple">Note (optional)</label>
             <textarea
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border-2 border-pookiePink rounded-pill px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pookiePurple bg-white/70 font-quick text-pookiePurple placeholder-pookiePink"
               value={note}
               onChange={e => setNote(e.target.value)}
               rows={2}
@@ -111,10 +112,10 @@ export default function NewAppointment() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50 font-semibold shadow"
+            className="w-full bg-gradient-to-r from-pookiePink to-pookiePurple text-white py-3 rounded-pill font-bold shadow-lg hover:from-pookiePurple hover:to-pookiePink transition-all duration-300 border-2 border-pookieGlow animate-pulse text-lg"
             disabled={loading}
           >
-            {loading ? "Creating..." : "Create Appointment"}
+            {loading ? "Creating..." : "Create Appointment ✨"}
           </button>
         </form>
       </div>

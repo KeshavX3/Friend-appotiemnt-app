@@ -60,34 +60,35 @@ export default function AppointmentDetail() {
     }
   };
 
-  if (loading) return <div className="flex justify-center items-center min-h-[80vh] bg-gradient-to-br from-blue-50 to-blue-100">Loading...</div>;
-  if (error) return <div className="flex justify-center items-center min-h-[80vh] text-red-500 bg-gradient-to-br from-blue-50 to-blue-100">{error}</div>;
-  if (!appointment) return <div className="flex justify-center items-center min-h-[80vh] text-gray-500 bg-gradient-to-br from-blue-50 to-blue-100">Appointment not found.</div>;
+  if (loading) return <div className="flex justify-center items-center min-h-[80vh] font-quick">Loading...</div>;
+  if (error) return <div className="flex justify-center items-center min-h-[80vh] text-pookiePink font-quick">{error}</div>;
+  if (!appointment) return <div className="flex justify-center items-center min-h-[80vh] text-pookiePurple font-quick">Appointment not found.</div>;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] bg-gradient-to-br from-blue-50 to-blue-100 px-2">
-      <div className="max-w-lg w-full bg-white rounded-2xl shadow-xl p-8 border border-blue-100 mt-8">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] font-quick">
+      <div className="relative max-w-lg w-full bg-white/80 backdrop-blur-lg rounded-super shadow-2xl border-2 border-pookiePink p-10 animate-float">
+        <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-4xl animate-pulse" role="img" aria-label="sparkle">🌟</span>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-blue-700">Appointment Details</h2>
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold capitalize shadow-sm ${
+          <h2 className="text-2xl font-extrabold text-pookiePink">Appointment Details <span className='ml-1'>💖</span></h2>
+          <span className={`px-4 py-1 rounded-pill text-xs font-bold capitalize shadow-sm border-2 border-pookieGlow animate-pulse ${
             appointment.status === "approved"
-              ? "bg-green-100 text-green-700"
+              ? "bg-pastelMint text-pookiePurple"
               : appointment.status === "pending"
-              ? "bg-yellow-100 text-yellow-700"
+              ? "bg-pastelYellow text-pookiePink"
               : appointment.status === "rejected"
-              ? "bg-red-100 text-red-700"
-              : "bg-yellow-50 text-yellow-800"
+              ? "bg-pastelPink text-pookiePurple"
+              : "bg-pastelPurple text-pookiePink"
           }`}>
             {appointment.status}
           </span>
         </div>
-        <div className="mb-2"><b>Type:</b> {appointment.type}</div>
-        <div className="mb-2"><b>Start:</b> {new Date(appointment.startTime).toLocaleString()}</div>
-        <div className="mb-2"><b>End:</b> {new Date(appointment.endTime).toLocaleString()}</div>
-        <div className="mb-2"><b>Status:</b> <span className="capitalize">{appointment.status}</span></div>
-        {appointment.note && <div className="mb-2"><b>Note:</b> {appointment.note}</div>}
+        <div className="mb-2"><b>Type:</b> <span className="text-pookiePurple">{appointment.type}</span></div>
+        <div className="mb-2"><b>Start:</b> <span className="text-pookiePurple">{new Date(appointment.startTime).toLocaleString()}</span></div>
+        <div className="mb-2"><b>End:</b> <span className="text-pookiePurple">{new Date(appointment.endTime).toLocaleString()}</span></div>
+        <div className="mb-2"><b>Status:</b> <span className="capitalize text-pookiePink">{appointment.status}</span></div>
+        {appointment.note && <div className="mb-2"><b>Note:</b> <span className="text-pookiePurple">{appointment.note}</span></div>}
         {appointment.status === "delayed" && (
-          <div className="mb-2 text-yellow-700">
+          <div className="mb-2 text-pookiePink">
             <b>Delay Reason:</b> {appointment.delayReason}<br />
             <b>New Time:</b> {appointment.newTime ? new Date(appointment.newTime).toLocaleString() : ""}
           </div>
@@ -95,46 +96,46 @@ export default function AppointmentDetail() {
         {canAct && (
           <div className="mt-6 space-y-3">
             <button
-              className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition disabled:opacity-50 font-semibold shadow"
+              className="w-full bg-gradient-to-r from-pookiePink to-pookiePurple text-white py-3 rounded-pill font-bold shadow-lg hover:from-pookiePurple hover:to-pookiePink transition-all duration-300 border-2 border-pookieGlow animate-pulse text-lg"
               disabled={actionLoading}
               onClick={() => handleAction("approved")}
             >
-              {actionLoading ? "Processing..." : "Approve"}
+              {actionLoading ? "Processing..." : "Approve 💖"}
             </button>
             <button
-              className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition disabled:opacity-50 font-semibold shadow"
+              className="w-full bg-gradient-to-r from-pastelPink to-pookiePink text-pookiePurple py-3 rounded-pill font-bold shadow-lg hover:from-pookiePurple hover:to-pookiePink transition-all duration-300 border-2 border-pookieGlow animate-pulse text-lg"
               disabled={actionLoading}
               onClick={() => handleAction("rejected")}
             >
-              {actionLoading ? "Processing..." : "Reject"}
+              {actionLoading ? "Processing..." : "Reject 💔"}
             </button>
             <div className="border-t pt-3">
-              <div className="mb-2 font-medium text-blue-800">Propose Delay</div>
+              <div className="mb-2 font-semibold text-pookiePurple">Propose Delay <span className='ml-1'>⏰</span></div>
               <input
                 type="text"
-                className="w-full border rounded px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border-2 border-pookiePink rounded-pill px-4 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-pookiePurple bg-white/70 font-quick text-pookiePurple placeholder-pookiePink"
                 placeholder="Reason for delay"
                 value={delayReason}
                 onChange={e => setDelayReason(e.target.value)}
               />
               <input
                 type="datetime-local"
-                className="w-full border rounded px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border-2 border-pookiePink rounded-pill px-4 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-pookiePurple bg-white/70 font-quick text-pookiePurple"
                 value={newTime}
                 onChange={e => setNewTime(e.target.value)}
               />
               <button
-                className="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 transition disabled:opacity-50 font-semibold shadow"
+                className="w-full bg-gradient-to-r from-pookiePurple to-pookiePink text-white py-3 rounded-pill font-bold shadow-lg hover:from-pookiePink hover:to-pookiePurple transition-all duration-300 border-2 border-pookieGlow animate-pulse text-lg"
                 disabled={actionLoading}
                 onClick={() => handleAction("delayed")}
               >
-                {actionLoading ? "Processing..." : "Propose Delay"}
+                {actionLoading ? "Processing..." : "Propose Delay ⏳"}
               </button>
             </div>
           </div>
         )}
         <button
-          className="w-full mt-6 bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300 font-semibold shadow"
+          className="w-full mt-6 bg-pastelPink text-pookiePurple py-3 rounded-pill font-bold shadow hover:bg-pookiePink hover:text-white transition-all duration-300 border-2 border-pookieGlow text-lg"
           onClick={() => navigate("/dashboard")}
         >
           Back to Dashboard
